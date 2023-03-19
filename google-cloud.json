@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "fullstack-assignment-381003",
+  "private_key_id": "647b7b52779063696bc61a3ceb0bc836c2000121",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCYdOktLIyJMArh\niJ6d341rG94CSZ23waunOo+3ull0oPWpshFuKqwHnTRCQsyKZli8JxMXJhHo3ExZ\n/DLEhX8Wm2DLIIVWTO6m1goMViB/pkX8WoJOz6x3oAXU36lY/gEArnJCMg2Pmy2b\noizA5a8EgPeViwlfASpPJutM6taSvgFaSsCIA3d/8uvSXEGlMTe9JeX/AO3zl4oC\njiAWPL/f8AtmmxNZfVerLARtIu2k71/Lgly7dOcintlmvGwoCNA5O4tozMm1nraJ\niyWMSQarChs7Ks4oPzEWRnuPyd/O5lrokYeKwiuqzV78XQ0OXqp7c7/uEsjo2fjm\nrXkUMtPvAgMBAAECggEABwpbHFFy2gEEd57aCFtjCf+69GsW4/4HIc1kBq2N5QNr\n5N7KzEYfNKjPWYIBNSD91w6M5KRG7nSB+CPb6lRp5o7dXPQPBEnAOacnxqMRlCOH\nFtzNKLuRcOLMciS0Ct6MCE6GC0WJd8jIRegq3euddf1Isbi+gYspu4cGFcLAjv0y\nDgGrIyfBKBQqOTyFtQbIfNUSI4+iYgDOsZIfiLq9YmW37SbDqgt2waBEEqBD1718\nTvmDyQX/KMH771hLegPp9M+g5bw3KEgQCLrcLjgLeaP7HFJNjLBgPYv0Of4weI75\n/ar+Xg4IJIAR31ycU15664M2ejRS55SLWocvII039QKBgQDI2gYbnqtjQFao9SU0\n2J3uW71TQCIs2SzUIn0Cmfc6/6Llzg0QP4y2Sa53w2A30r4IhumFX/9g7lAephP2\nX7AVYYmjnvxoGlC0q54KH7OXGMY51X2/UAd4kE0W0/bz7zJvCy2AklAgy9tcB79D\nbOJytXeSdAlKTMmj+I6ap8K5wwKBgQDCUS1UGrWQDe5eZ78Rvkf2I1E62XMJ4MFa\nMbU+6NCRrevuE3wNmy1A0XA12DZMw743C0M30xUUoDozeLK1ycBkgNwuTWul89kK\nTP8sgP4Cm9O9gc7nQkuFGfvH9S4xYfhOGXK+AsYFEvKoHaRelreH1bT0+uvA2UQl\neKCRjp+uZQKBgH3DZsesloxTIPAyb9WjPWCeuPGD2uJSKiu6XKRgW9npb8qNNsjR\nwf3yLPh4sarCnpMgRuBot7OuBSTrwNwoFk2NAW4egtV8hMRcIV0ddIpLzPMxpsdA\nCS2IzXxZxOwA/odhbGBxPRMMEpKRl0VUzIYe8nwVhCut4SR24nQcT2WZAoGBAKdz\nhPhhO+0z1CKOjN0heKnnrWxlTvlIMdcj1uirgHDJy/KR3+lpvAmLcoM0Gzbzx8tv\nbTGCOTxZB06ryHVXsu/pC9Tq6sVL6dEyoQMc9cgRuNoqLr6jJqlAxvR9mJz9rBjB\nXVvY0AQ3W9z8DlVk1Cu+Qf6K7PZ3RH52AQjuOzTxAoGAAio8SDOw7wzhRDhMqKrK\nW7Un2SssNcFgFVUO0ku+XzeEhPnqYuLmnaOSSw5d17WAeLZ0ZGQZ7J7oqb5TEjbU\nSZAQCJTMonbALw1rDzqqfuD/lFXU2ncoLvWbJ3jBXgOlGks7Dzr5RquhtKKDd8HK\nE39LToTkkA3FX8Yq4q535XA=\n-----END PRIVATE KEY-----\n",
+  "client_email": "fullstack-assignment@fullstack-assignment-381003.iam.gserviceaccount.com",
+  "client_id": "107179849066940218737",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/fullstack-assignment%40fullstack-assignment-381003.iam.gserviceaccount.com"
+}
