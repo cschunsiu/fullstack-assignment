@@ -1,10 +1,9 @@
 const axios = require('axios');
 
-const loginRequest = async (username) => {
-    console.log('API service: Login Request API: ', username);
-    return axios.post("http://localhost:3000/login", {username})
+const loginRequest = async (username, type) => {
+    console.log('API service: Auth Request API: ', username, type);
+    return axios.post("http://localhost:3000/auth", {username, type})
         .then(res => {
-            console.log(res.data)
             return res.data;
         })
         .catch(err => {
@@ -33,6 +32,7 @@ const uploadRequest = async (username, image, updateProgress, position) => {
             return res.data;
         })
         .catch(err => {
+            updateProgress(-1, {}, position);
             if (err.response && err.response.data) {
                 return err.response.data;
             }

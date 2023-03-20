@@ -18,7 +18,7 @@
                 :key="i"
                 :class="`pa4 text-left`">
               <w-progress
-                  v-if="header.key===`status`"
+                  v-if="header.key ===`status` && item[header.key] > -1"
                   v-model="item[header.key]"
                   size="1.3em"
                   round
@@ -26,6 +26,7 @@
                   label-color="black"
                   label>
               </w-progress>
+              <div v-else-if="header.key==='status' && item[header.key] === -1" style="color: red">Error Occurs while Uploading</div>
               <div v-else-if="header.key==='data'" v-for="(key, index) in Object.keys(item[header.key])" :key="index">
                 <div key="index">{{key}}: {{item[header.key][key]}}</div>
               </div>
@@ -72,6 +73,9 @@ export default {
         items: []
       },
     }
+  },
+  mounted() {
+    this.table.items = this.info.images;
   },
   methods: {
     async fileUpload(e){

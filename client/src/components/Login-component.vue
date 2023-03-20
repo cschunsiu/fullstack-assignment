@@ -2,7 +2,10 @@
   <div/>
   <div :class="contentClass">
     <input type="text" v-model="username" placeholder="Your username"/>
-    <w-button bg-color="primary" shadow class="lg2" text xl width="100" :height="50" @click="onClickLogin">Login</w-button>
+    <div :class="interactionClass">
+      <w-button bg-color="primary" shadow class="lg2" text xl width="100" :height="50" @click="onClick('sign-Up')">Sign Up</w-button>
+      <w-button bg-color="primary" shadow class="lg2" text xl width="100" :height="50" @click="onClick('sign-In')">Sign In</w-button>
+    </div>
   </div>
   <div/>
 </template>
@@ -16,15 +19,16 @@ export default {
   data() {
     return {
       contentClass: 'content',
+      interactionClass: 'interaction',
       username: ''
     }
   },
   methods: {
-    async onClickLogin() {
+    async onClick(type) {
       if (isEmpty(this.username)) {
         this.$emit('response', { message: 'Please enter a valid username'});
       } else {
-        let polishedResult = await loginRequest(this.username);
+        let polishedResult = await loginRequest(this.username, type);
         this.$emit('response', polishedResult);
       }
     }
@@ -44,5 +48,10 @@ div {
   flex-direction: column;
   height: 30%;
   padding: 15px;
+}
+.interaction {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
 }
 </style>

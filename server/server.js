@@ -10,18 +10,21 @@ const formidable = require('formidable');
 const { converBase64ToImage } = require('convert-base64-to-image');
 
 const app = express();
-const googleClient = new vision.ImageAnnotatorClient({keyFilename: "../google-cloud.json"});
+const googleClient = new vision.ImageAnnotatorClient({keyFilename: path.join(__dirname, "../google-cloud.json")});
 async function detectFaces(imagePath) {
     const results = await googleClient.faceDetection(imagePath);
     const faces = results[0].faceAnnotations;
     return {
         'Number of faces': faces.length,
-        'Happy faces': faces.filter(face => face.joyLikelihood === 'VERY_LIKELY').length,
-        'Anger faces': faces.filter(face => face.angerLikelihood === 'VERY_LIKELY').length,
-        'Sad faces': faces.filter(face => face.sorrowLikelihood === 'VERY_LIKELY').length,
+        'Happy faces': faces.filter(face => face.joyLikelihood === 'VERY_LIKELY' || face.joyLikelihood === 'LIKELY').length,
+        'Anger faces': faces.filter(face => face.angerLikelihood === 'VERY_LIKELY' || face.angerLikelihood === 'LIKELY').length,
+        'Sad faces': faces.filter(face => face.sorrowLikelihood === 'VERY_LIKELY' || face.sorrowLikelihood === 'LIKELY').length,
     };
 }
-
+const AUTH_TYPE = {
+    SIGN_UP: 'sign-Up',
+    SIGN_IN: 'sign-In'
+}
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -33,27 +36,39 @@ app.get('*', (req, res) => {
 });
 
 // API for login
-app.post('/login', (req, res, next) => {
-    const { username } = req.body;
-    console.log('Login API received: ', username);
+app.post('/auth', (req, res, next) => {
+    const { username, type } = req.body;
+    console.log('Auth API received: ', username, type);
 
     try {
-        let data = cache.get('data');
-
         // TODO should use singleton pattern instead
+        // get data from memory
+        let data = cache.get('data');
         if (isNil(data)) {
             data = {};
         }
 
-        if (!Object.keys(data).includes(username)) {
-            data[username] = {
-                images: []
-            }
-            cache.put('data', data);
-        } else {
+        // if trying to sign up but username exist, throw error
+        if (type === AUTH_TYPE.SIGN_UP && Object.keys(data).includes(username)) {
             const error = new Error('Error: Username already exists, please try again');
             error.status = 400;
             throw error;
+        }
+
+        // if trying to sign in but nothing comes up
+        if (type === AUTH_TYPE.SIGN_IN && !Object.keys(data).includes(username)) {
+            const error = new Error(`Error: Username doesn't exists, please try again`);
+            error.status = 400;
+            throw error;
+        }
+
+        let profileInfo = data[username];
+        if (isEmpty(profileInfo)) {
+            profileInfo = {
+                images: []
+            }
+            data[username] = profileInfo;
+            cache.put('data', data);
         }
 
         // Generate JWT token
@@ -61,11 +76,9 @@ app.post('/login', (req, res, next) => {
 
         // Return JWT token to client
         res.json({
-            token,
             username,
-            model: {
-                images: []
-            }
+            token,
+            ...profileInfo
         });
     } catch (error) {
         next(error);
@@ -77,6 +90,7 @@ app.post('/image', async (req, res, next) => {
     setTimeout(async () => {
         try {
             console.log('Image Upload API received.');
+            // parse formData
             const form = formidable({ multiples: true });
             let formFields = await new Promise((result, reject) => {
                 form.parse(req, (err, fields, files) => {
@@ -88,12 +102,12 @@ app.post('/image', async (req, res, next) => {
                 });
             })
 
+            // put image into Google API
             const pathToSaveImage = './image.png'
             await converBase64ToImage(formFields.image, pathToSaveImage);
             const imageDetails = await detectFaces(pathToSaveImage);
 
             let data = cache.get('data');
-
             if (isEmpty(data)) {
                 data[formFields.username] = {
                     images: []
@@ -104,7 +118,7 @@ app.post('/image', async (req, res, next) => {
             const template = {
                 name: formFields.name,
                 status: 100,
-                data: []
+                data: imageDetails
             };
             userData.images.push(template);
             cache.put('data', data);
