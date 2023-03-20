@@ -11,10 +11,7 @@ The following website is a tutorial to create one: https://cloud.google.com/iam/
 
 3. rename the json file to `google-cloud.json`
 
-4. please run the following command.
-```
-docker-compose up
-```
+4. please run the following command. `docker-compose up`
 
 5. you will be able to access the application directly through the following endpoint.
 `http://localhost:3000/`
